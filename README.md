@@ -1,5 +1,5 @@
-#USE 2.2.11, 2.3.1 IS BUGGY 
-and I do not have time soon to fix it properly. Sorry!
+Note: This fork fixes the forwaring of appearance methods (see https://github.com/Inferis/ViewDeck/issues/396)
+I used ViewDeck Version as 2.2.11 as base, thatswhy im bumped the version to 2.2.12
 
 # IIViewDeckController
 
