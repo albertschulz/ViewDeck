@@ -18,7 +18,6 @@
 @synthesize window = _window;
 @synthesize centerController = _viewController;
 @synthesize leftController = _leftController;
-@synthesize imageController = _imageController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -59,6 +58,21 @@
     return YES;
 }
 
+- (IIViewDeckController*)generateControllerStack {
+    LeftViewController* leftController = [[LeftViewController alloc] initWithNibName:@"LeftViewController" bundle:nil];
+    RightViewController* rightController = [[RightViewController alloc] initWithNibName:@"RightViewController" bundle:nil];
+
+    UIViewController *centerController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    centerController = [[UINavigationController alloc] initWithRootViewController:centerController];
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerController
+                                                                                    leftViewController:leftController
+                                                                                   rightViewController:rightController];
+    deckController.rightSize = 100;
+
+    [deckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
+    return deckController;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -70,7 +84,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
 }
